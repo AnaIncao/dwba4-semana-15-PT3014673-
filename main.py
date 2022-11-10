@@ -1,5 +1,7 @@
+
 import logging
 import traceback
+from flask import redirect
 
 import flask
 from replit import db
@@ -35,4 +37,16 @@ def limparBanco():
     logging.exception(e)
     return flask.render_template('contatos.html')
     
+
+@app.route('/limparResgistro/<email>', methods=['POST'])
+def limparResgistro(email):
+  try:
+    contatos = db.get('contatos', {});
+    del contatos[email];
+    db['contatos'] = contatos;
+    return redirect('/');
+  except Exception as e:
+    logging.exception(e);
+    return flask.render_template('contatos.html');
+  
 app.run('0.0.0.0')
