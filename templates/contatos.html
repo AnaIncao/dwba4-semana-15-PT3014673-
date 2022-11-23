@@ -49,9 +49,9 @@
                 <fieldset>
                   <legend>Opções de Resposta</legend>
                   <label for="contato_opEmail"> E-Mail</label>
-              <input type="checkbox" name="op" id="contato_opEmail" value="Email"/>
-              <label for="contato_opTelefone">Telefone</label>
-              <input type="checkbox" name="op" id="contato_opTelefone" value="telefone"/>
+                  <input type="checkbox" name="resposta" id="contato_opEmail" value="Email"/>
+                  <label for="contato_opTelefone">Telefone</label>
+                  <input type="checkbox" name="resposta" id="contato_opTelefone" value="Telefone"/>
                 </fieldset>
               </li>
               
@@ -71,7 +71,7 @@
             <th>Assunto</th>
             <th>Mensagem</th>
             <th>Opções de Resposta</th>
-            <th>Ações</th>
+            <th colspan='2'>Ações</th>
           </tr>
           {% for value in contatos %}                        
           <tr>
@@ -80,11 +80,16 @@
             <td>{{contatos[value]['telefone'] }}</td>
             <td>{{contatos[value]['assunto'] }}</td>
             <td>{{contatos[value]['mensagem'] }}</td>
-            <td>{{contatos[value]['op'] }}</td>
+            <td>{{contatos[value]['resposta'] }}</td>
             <td>
               <form method="POST" action="/limparResgistro/{{value}}">
                   <input type="submit" value="Eliminar Registro" name="delete"/>
-                </form>
+              </form>
+            </td>
+            <td>
+              <form method="POST" action="/update/{{value}}">
+                  <input type="submit" value="Update Registro" name="update"/>
+              </form>
             </td>
           </tr>  
           {% endfor %}                      
